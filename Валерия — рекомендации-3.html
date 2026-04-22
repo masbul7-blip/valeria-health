@@ -1,0 +1,987 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Рекомендации нутрициолога — Валерия</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=Jost:wght@300;400;500&display=swap');
+
+  :root {
+    --cream: #faf7f2;
+    --warm: #f0ebe0;
+    --sage: #8a9e8c;
+    --sage-light: #b8cbb9;
+    --dark: #2c2c2c;
+    --muted: #7a7570;
+    --accent: #c4956a;
+    --accent-light: #e8d5c0;
+    --border: #e0d8cc;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Jost', sans-serif;
+    background: var(--cream);
+    color: var(--dark);
+    font-size: 15px;
+    line-height: 1.6;
+  }
+
+  header {
+    background: var(--dark);
+    color: var(--cream);
+    padding: 36px 24px 28px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  header::before {
+    content: '';
+    position: absolute;
+    top: -40px; right: -40px;
+    width: 180px; height: 180px;
+    border-radius: 50%;
+    background: var(--sage);
+    opacity: 0.15;
+  }
+
+  header::after {
+    content: '';
+    position: absolute;
+    bottom: -30px; left: 30px;
+    width: 100px; height: 100px;
+    border-radius: 50%;
+    background: var(--accent);
+    opacity: 0.1;
+  }
+
+  .header-label {
+    font-family: 'Jost', sans-serif;
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--sage-light);
+    margin-bottom: 8px;
+  }
+
+  header h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 32px;
+    font-weight: 300;
+    line-height: 1.2;
+    margin-bottom: 16px;
+  }
+
+  .header-meta {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+
+  .meta-item {
+    font-size: 12px;
+    color: rgba(250,247,242,0.6);
+    font-weight: 300;
+  }
+
+  .meta-item span {
+    color: var(--cream);
+    font-weight: 400;
+  }
+
+  /* Nav tabs */
+  .nav {
+    display: flex;
+    overflow-x: auto;
+    background: var(--warm);
+    border-bottom: 1px solid var(--border);
+    padding: 0 8px;
+    gap: 0;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    touch-action: pan-x;
+  }
+  .nav::-webkit-scrollbar { display: none; }
+
+  .nav-btn {
+    flex-shrink: 0;
+    padding: 16px 14px;
+    min-height: 52px;
+    font-family: 'Jost', sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.05em;
+    color: var(--muted);
+    background: none;
+    border: none;
+    border-bottom: 2px solid transparent;
+    cursor: pointer;
+    transition: all 0.2s;
+    white-space: nowrap;
+    -webkit-tap-highlight-color: rgba(196,149,106,0.15);
+    touch-action: manipulation;
+    user-select: none;
+    -webkit-user-select: none;
+  }
+
+  .nav-btn.active {
+    color: var(--dark);
+    border-bottom-color: var(--accent);
+  }
+
+  /* Sections */
+  .section { display: none; padding: 24px 20px; }
+  .section.active { display: block; }
+
+  /* Time block */
+  .time-block {
+    margin-bottom: 28px;
+    animation: fadeUp 0.3s ease;
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(8px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .time-label {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 12px;
+  }
+
+  .time-label-text {
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  .time-label-line {
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+
+  /* Drug card */
+  .drug-card {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 16px;
+    margin-bottom: 10px;
+    transition: box-shadow 0.2s;
+  }
+
+  .drug-card:active { box-shadow: 0 2px 12px rgba(0,0,0,0.08); }
+
+  .drug-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 12px;
+    margin-bottom: 6px;
+  }
+
+  .drug-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 18px;
+    font-weight: 500;
+    color: var(--dark);
+    line-height: 1.2;
+  }
+
+  .drug-duration {
+    font-size: 11px;
+    font-weight: 500;
+    background: var(--accent-light);
+    color: var(--accent);
+    padding: 3px 9px;
+    border-radius: 20px;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+
+  .drug-duration.permanent {
+    background: #e0ece1;
+    color: var(--sage);
+  }
+
+  .drug-dose {
+    font-size: 13px;
+    color: var(--muted);
+    margin-bottom: 6px;
+  }
+
+  .drug-note {
+    font-size: 12px;
+    color: var(--accent);
+    font-style: italic;
+    margin-bottom: 8px;
+  }
+
+  .drug-links {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-top: 8px;
+  }
+
+  .buy-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--sage);
+    text-decoration: none;
+    background: #f0f5f0;
+    padding: 5px 12px;
+    border-radius: 20px;
+    transition: background 0.2s;
+  }
+
+  .buy-link:active { background: #ddeadd; }
+
+  .buy-link::before {
+    content: '→';
+    font-size: 11px;
+  }
+
+  /* Special card */
+  .drug-card.special {
+    border-color: var(--accent-light);
+    background: linear-gradient(135deg, #fffaf6, white);
+  }
+
+  .drug-card.special .drug-name { color: var(--accent); }
+
+  /* Warning card */
+  .drug-card.warning {
+    border-left: 3px solid #e8a87c;
+  }
+
+  /* Table */
+  .period-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid var(--border);
+    margin-bottom: 20px;
+  }
+
+  .period-table th {
+    background: var(--dark);
+    color: var(--cream);
+    padding: 12px 14px;
+    text-align: left;
+    font-family: 'Jost', sans-serif;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .period-table td {
+    padding: 11px 14px;
+    border-bottom: 1px solid var(--border);
+    vertical-align: top;
+    line-height: 1.5;
+  }
+
+  .period-table tr:last-child td { border-bottom: none; }
+  .period-table tr:nth-child(even) td { background: var(--warm); }
+
+  .period-table td:first-child {
+    font-weight: 500;
+    color: var(--accent);
+    white-space: nowrap;
+    width: 90px;
+  }
+
+  /* Rules section */
+  .rule-card {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 16px;
+    margin-bottom: 10px;
+  }
+
+  .rule-card h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 17px;
+    font-weight: 500;
+    margin-bottom: 8px;
+    color: var(--dark);
+  }
+
+  .rule-card p, .rule-card li {
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 1.6;
+  }
+
+  .rule-card ul { padding-left: 16px; }
+  .rule-card li { margin-bottom: 4px; }
+
+  .rule-card.restrict {
+    border-left: 3px solid #e0a0a0;
+  }
+
+  .rule-card.restrict h3 { color: #c06060; }
+
+  .rule-card.allow {
+    border-left: 3px solid var(--sage-light);
+  }
+
+  .rule-card.allow h3 { color: var(--sage); }
+
+  /* Products */
+  .product-group {
+    margin-bottom: 24px;
+  }
+
+  .product-group h3 {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 10px;
+    padding-bottom: 6px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .product-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0;
+    border-bottom: 1px solid var(--border);
+    gap: 12px;
+  }
+
+  .product-item:last-child { border-bottom: none; }
+
+  .product-name {
+    font-size: 14px;
+    color: var(--dark);
+  }
+
+  .product-links {
+    display: flex;
+    gap: 6px;
+    flex-shrink: 0;
+  }
+
+  .mini-link {
+    font-size: 11px;
+    font-weight: 500;
+    color: white;
+    background: var(--sage);
+    text-decoration: none;
+    padding: 4px 10px;
+    border-radius: 20px;
+  }
+
+  /* IV drips */
+  .iv-card {
+    background: linear-gradient(135deg, #f5f0f8, white);
+    border: 1px solid #ddd0e8;
+    border-radius: 12px;
+    padding: 16px;
+    margin-bottom: 10px;
+  }
+
+  .iv-card h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 17px;
+    color: #7a5a9a;
+    margin-bottom: 6px;
+  }
+
+  .iv-badge {
+    display: inline-block;
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    background: #ede5f5;
+    color: #7a5a9a;
+    padding: 3px 9px;
+    border-radius: 20px;
+    margin-bottom: 8px;
+  }
+
+  .footnote {
+    font-size: 12px;
+    color: var(--muted);
+    background: var(--warm);
+    border-radius: 8px;
+    padding: 12px 14px;
+    margin-top: 16px;
+    line-height: 1.5;
+  }
+
+  .footnote strong { color: var(--dark); }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-label">Рекомендации нутрициолога</div>
+  <h1>Протокол<br>приёма</h1>
+  <div class="header-meta">
+    <div class="meta-item">Консультация <span>апрель 2026</span></div>
+    <div class="meta-item">Повторная явка <span>июнь 2026</span></div>
+  </div>
+</header>
+
+<nav class="nav">
+  <button class="nav-btn active" onclick="show('protocol', this)">Протокол</button>
+  <button class="nav-btn" onclick="show('periods', this)">Сроки</button>
+  <button class="nav-btn" onclick="show('nutrition', this)">Питание</button>
+  <button class="nav-btn" onclick="show('products', this)">Продукты</button>
+  <button class="nav-btn" onclick="show('iv', this)">Капельницы</button>
+</nav>
+
+<!-- ПРОТОКОЛ -->
+<div id="protocol" class="section active">
+
+  <div class="time-block">
+    <div class="time-label">
+      <span class="time-label-text">Натощак</span>
+      <div class="time-label-line"></div>
+    </div>
+
+    <div class="drug-card warning">
+      <div class="drug-header">
+        <div class="drug-name">Артишок</div>
+        <div class="drug-duration">2 месяца</div>
+      </div>
+      <div class="drug-dose">2 таблетки</div>
+      <div class="drug-links">
+        <a href="https://perm.asna.ru/cards/khofitol_n60_tab_laboratoires_rosa-phytopharma.html" class="buy-link">Аsna</a>
+        <a href="https://usmall.ru/product/11759421-solaray-vital-extracts-artichoke-60-vegcaps-300-mg-per-capsule-solaray?variant=98783277&color=nocolor&size=60+Count" class="buy-link">Usmall</a>
+      </div>
+    </div>
+
+    <div class="drug-card warning">
+      <div class="drug-header">
+        <div class="drug-name">Инозитол</div>
+        <div class="drug-duration">3–4 месяца</div>
+      </div>
+      <div class="drug-dose">½ ч. ложки порошка на стакан воды</div>
+      <div class="drug-note">⚠️ Растворять вместе со Стимолом в одном стакане</div>
+      <div class="drug-links">
+        <a href="https://usmall.ru/product/13080734-inositol-powder-now-foods?variant=110974568&color=nocolor&size=8+oz" class="buy-link">Порошок — Usmall</a>
+        <a href="https://www.eapteka.ru/goods/id219406/" class="buy-link">Саше — Eapteka</a>
+      </div>
+    </div>
+
+    <div class="drug-card warning">
+      <div class="drug-header">
+        <div class="drug-name">Стимол</div>
+        <div class="drug-duration">1 месяц</div>
+      </div>
+      <div class="drug-dose">1 саше на стакан воды</div>
+      <div class="drug-note">⚠️ Растворять вместе с Инозитолом</div>
+      <div class="drug-links">
+        <a href="https://www.eapteka.ru/goods/id102745/" class="buy-link">Eapteka</a>
+      </div>
+    </div>
+
+    <div class="drug-card">
+      <div class="drug-header">
+        <div class="drug-name">Коллаген</div>
+        <div class="drug-duration">2–3 месяца</div>
+      </div>
+      <div class="drug-dose">2 мерные ложки на стакан воды</div>
+      <div class="drug-links">
+        <a href="https://www.ozon.ru/product/kollagen-poroshok-peptidnyy-s-vitaminom-s-i-vkusom-limona-leaftogo-nabor-3-sht-90-portsiy-591140615/" class="buy-link">Ozon (с лимоном)</a>
+        <a href="https://usmall.ru/product/11778103-vital-proteins-collagen-peptides-unflavored-10-oz-284-g-vital-proteins?variant=98823183&color=nocolor&size=1.25+lb" class="buy-link">Vital Proteins</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="time-block">
+    <div class="time-label">
+      <span class="time-label-text">Завтрак</span>
+      <div class="time-label-line"></div>
+    </div>
+
+    <div class="drug-card">
+      <div class="drug-header">
+        <div class="drug-name">Витамин Д 5000 МЕ</div>
+        <div class="drug-duration permanent">Постоянно</div>
+      </div>
+      <div class="drug-dose">1 капсула</div>
+      <div class="drug-links">
+        <a href="https://ozon.ru/t/p5lvo82" class="buy-link">Ozon</a>
+        <a href="https://usmall.ru/product/5222540-vitamin-d-3-5000-iu-240-softgels-now-foods?variant=52284861&color=no-color&size=5000+IU+-+240+Softgels" class="buy-link">Now Foods</a>
+      </div>
+    </div>
+
+    <div class="drug-card">
+      <div class="drug-header">
+        <div class="drug-name">Омега</div>
+        <div class="drug-duration permanent">Постоянно</div>
+      </div>
+      <div class="drug-dose">1 таблетка</div>
+      <div class="drug-links">
+        <a href="https://usmall.ru/product/7087706-ultra-omega-3-fish-oil-bovine-gelatin-softgels-90-sgels-now-foods?variant=66240685&color=no-color&size=90" class="buy-link">Now Foods Ultra Omega-3</a>
+      </div>
+    </div>
+
+    <div class="drug-card">
+      <div class="drug-header">
+        <div class="drug-name">Витамин Е</div>
+        <div class="drug-duration">2 месяца</div>
+      </div>
+      <div class="drug-dose">1 таблетка</div>
+      <div class="drug-note">Принимать вместе с Омегой и Витамином А</div>
+      <div class="drug-links">
+        <a href="https://ozon.ru/t/wG5nlgO" class="buy-link">Ozon</a>
+      </div>
+    </div>
+
+    <div class="drug-card">
+      <div class="drug-header">
+        <div class="drug-name">Витамин А</div>
+        <div class="drug-duration">2 месяца</div>
+      </div>
+      <div class="drug-dose">3 таблетки</div>
+      <div class="drug-links">
+        <a href="https://ozon.ru/t/wG5CF9K" class="buy-link">Ozon</a>
+        <a href="https://usmall.ru/product/9414907-vitamin-a-10000-softgels-now-foods?variant=80235119&color=no-color&size=100" class="buy-link">Now Foods</a>
+      </div>
+    </div>
+
+    <div class="drug-card special">
+      <div class="drug-header">
+        <div class="drug-name">Фемибион 1</div>
+        <div class="drug-duration permanent">Длительно (до родов)</div>
+      </div>
+      <div class="drug-dose">1 таблетка</div>
+      <div class="drug-note">✦ Для планирования беременности — более 6 месяцев</div>
+      <div class="drug-links">
+        <a href="https://www.eapteka.ru/goods/id513349/" class="buy-link">Eapteka</a>
+      </div>
+    </div>
+
+    <div class="drug-card">
+      <div class="drug-header">
+        <div class="drug-name">Цинк</div>
+        <div class="drug-duration">2 месяца</div>
+      </div>
+      <div class="drug-dose">1 таблетка</div>
+      <div class="drug-links">
+        <a href="https://ozon.ru/t/p5lvBsQ" class="buy-link">Ozon</a>
+        <a href="https://usmall.ru/product/11782400-thorne-zinc-picolinate-30-mg-180-capsules-thorne?variant=98831926&color=15-mg&size=60+Count" class="buy-link">Thorne</a>
+      </div>
+    </div>
+
+    <div class="drug-card warning">
+      <div class="drug-header">
+        <div class="drug-name">Энтерофурил</div>
+        <div class="drug-duration">6 дней</div>
+      </div>
+      <div class="drug-dose">1 таблетка × 3 раза в день</div>
+      <div class="drug-links">
+        <a href="https://www.eapteka.ru/goods/id210302/" class="buy-link">Eapteka</a>
+      </div>
+    </div>
+
+    <div class="drug-card">
+      <div class="drug-header">
+        <div class="drug-name">Фамвиталь</div>
+        <div class="drug-duration">До конца упаковки</div>
+      </div>
+      <div class="drug-dose">2 красные капсулы на завтрак + 1 чёрная капсула на ужин</div>
+      <div class="drug-links">
+        <a href="https://www.eapteka.ru/goods/id519653/" class="buy-link">Eapteka</a>
+      </div>
+    </div>
+
+    <div class="drug-card">
+      <div class="drug-header">
+        <div class="drug-name">Ортнео</div>
+        <div class="drug-duration">2 месяца</div>
+      </div>
+      <div class="drug-dose">1 таблетка (для суставов)</div>
+      <div class="drug-links">
+        <a href="https://apteka.ru/product/artneo-30-sht-kapsuly-63c4d8833723515699ca5ae8/" class="buy-link">Apteka.ru</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="time-block">
+    <div class="time-label">
+      <span class="time-label-text">Ужин</span>
+      <div class="time-label-line"></div>
+    </div>
+
+    <div class="drug-card">
+      <div class="drug-header">
+        <div class="drug-name">Медь</div>
+        <div class="drug-duration">2 месяца</div>
+      </div>
+      <div class="drug-dose">1 таблетка</div>
+      <div class="drug-links">
+        <a href="https://ozon.ru/t/OLWY2Pg" class="buy-link">Ozon</a>
+        <a href="https://usmall.ru/product/11783817-thorne-copper-bisglycinate-60-capsules-2-mg-per-capsule-thorne?variant=98834901&color=nocolor&size=60+Count" class="buy-link">Thorne</a>
+      </div>
+    </div>
+
+    <div class="drug-card">
+      <div class="drug-header">
+        <div class="drug-name">Витамины для волос</div>
+        <div class="drug-duration">4 месяца</div>
+      </div>
+      <div class="drug-dose">1–2 таблетки</div>
+      <div class="drug-links">
+        <a href="https://ozon.ru/t/d7JM6Hn" class="buy-link">Ozon</a>
+        <a href="https://usmall.ru/product/11780118-country-life-maxi-hair-skin-nails-50-60-vegetarian-capsules-country-life?variant=100087821&color=nocolor&size=60+Count" class="buy-link">Country Life</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="time-block">
+    <div class="time-label">
+      <span class="time-label-text">На ночь</span>
+      <div class="time-label-line"></div>
+    </div>
+
+    <div class="drug-card">
+      <div class="drug-header">
+        <div class="drug-name">Магний</div>
+        <div class="drug-duration permanent">Постоянно</div>
+      </div>
+      <div class="drug-dose">2 таблетки</div>
+      <div class="drug-links">
+        <a href="https://www.wildberries.ru/catalog/211860783/detail.aspx" class="buy-link">Wildberries</a>
+        <a href="https://usmall.ru/product/11063343-kal-magnesium-glycinate-activgels-315mg" class="buy-link">KAL (Usmall)</a>
+      </div>
+    </div>
+
+    <div class="drug-card">
+      <div class="drug-header">
+        <div class="drug-name">Теанин</div>
+        <div class="drug-duration">2 месяца</div>
+      </div>
+      <div class="drug-dose">1 таблетка (для сна)</div>
+      <div class="drug-links">
+        <a href="https://ozon.ru/t/R9VUxMi" class="buy-link">Ozon</a>
+        <a href="https://usmall.ru/product/10072170-l-theanine-double-strength-200-mg-veg-capsules-now-foods?variant=85281538&color=no-color&size=120" class="buy-link">Now Foods</a>
+      </div>
+    </div>
+
+    <div class="drug-card">
+      <div class="drug-header">
+        <div class="drug-name">Хомоспорин</div>
+        <div class="drug-duration permanent">Курс</div>
+      </div>
+      <div class="drug-dose">1 ст. ложка на стакан воды</div>
+      <div class="drug-note">Затем: Ветом 1 → 20 дней, потом Ветом 2 → 20 дней (по 2 таб)</div>
+      <div class="drug-links">
+        <a href="https://ozon.ru/t/GcT7xWg" class="buy-link">Хомоспорин</a>
+        <a href="https://ozon.ru/t/EAZds1Y" class="buy-link">Ветом 1</a>
+        <a href="https://ozon.ru/t/Mt3p5Xb" class="buy-link">Ветом 2</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="time-block">
+    <div class="time-label">
+      <span class="time-label-text">При болях в суставах</span>
+      <div class="time-label-line"></div>
+    </div>
+    <div class="drug-card">
+      <div class="drug-header">
+        <div class="drug-name">Тайгер бальзам</div>
+        <div class="drug-duration">По необходимости</div>
+      </div>
+      <div class="drug-dose">Наносить на суставы на ночь</div>
+      <div class="drug-links">
+        <a href="https://ozon.ru/t/lwiHol2" class="buy-link">Ozon</a>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- СРОКИ -->
+<div id="periods" class="section">
+  <table class="period-table">
+    <thead>
+      <tr><th>Срок</th><th>Препараты</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>6 дней</td>
+        <td>Энтерофурил (3 раза в день)</td>
+      </tr>
+      <tr>
+        <td>1 месяц</td>
+        <td>Стимол</td>
+      </tr>
+      <tr>
+        <td>2 месяца</td>
+        <td>Артишок, Витамин Е, Витамин А, Цинк, Медь, Теанин, Ортнео, Фамвиталь (до конца упаковки)</td>
+      </tr>
+      <tr>
+        <td>2–3 месяца</td>
+        <td>Коллаген</td>
+      </tr>
+      <tr>
+        <td>3–4 месяца</td>
+        <td>Инозитол</td>
+      </tr>
+      <tr>
+        <td>4 месяца</td>
+        <td>Витамины для волос</td>
+      </tr>
+      <tr>
+        <td>Длительно</td>
+        <td>Фемибион 1 (более 6 мес, до родов)</td>
+      </tr>
+      <tr>
+        <td>Постоянно</td>
+        <td>Витамин Д, Омега, Магний</td>
+      </tr>
+      <tr>
+        <td>Ноябрь–декабрь</td>
+        <td>Капельницы (после сдачи ферритина)</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="footnote">
+    <strong>Повторная консультация — июнь 2026.</strong><br>
+    Через 2–2,5 месяца сдать: ТТГ, витамин В12, В9, инсулин, лептин, цинк, медь, ферритин.<br><br>
+    <strong>УЗИ сосудов шеи</strong> — в плановом порядке.
+  </div>
+</div>
+
+<!-- ПИТАНИЕ -->
+<div id="nutrition" class="section">
+
+  <div class="rule-card allow">
+    <h3>💧 Вода</h3>
+    <p>Не менее <strong>1500 мл</strong> чистой воды в сутки.</p>
+  </div>
+
+  <div class="rule-card allow">
+    <h3>🥩 Белок</h3>
+    <p>40–50 г в сутки, максимум 80 г.<br>Источники: яйца, мясо, рыба, сыр, творог.</p>
+  </div>
+
+  <div class="rule-card allow">
+    <h3>🍳 На чём жарить</h3>
+    <ul>
+      <li>Кокосовое масло</li>
+      <li>Масло авокадо — <a href="https://ozon.ru/t/QoR5Yl5" style="color:var(--sage)">купить</a></li>
+      <li>Сливочное масло — <a href="https://ozon.ru/t/g2xlnlo" style="color:var(--sage)">купить</a></li>
+      <li>Масло ГХИ — <a href="https://ozon.ru/t/3hYfqT5" style="color:var(--sage)">купить</a></li>
+    </ul>
+  </div>
+
+  <div class="rule-card allow">
+    <h3>🧀 Молочные продукты</h3>
+    <p>Жидкие исключить (молоко, кефир, ряженка).<br>Оставить: творог, сыр.</p>
+  </div>
+
+  <div class="rule-card allow">
+    <h3>🍷 Алкоголь</h3>
+    <p>Не более одной бутылки сухого вина в неделю.</p>
+  </div>
+
+  <div class="rule-card restrict">
+    <h3>🚫 Запрещено</h3>
+    <ul>
+      <li>Арахис, орехи, сухофрукты, семечки</li>
+      <li>Сладкие напитки — компоты, морсы, энергетики</li>
+      <li>Молоко, кефир, ряженка</li>
+    </ul>
+  </div>
+
+  <div class="rule-card restrict">
+    <h3>⚠️ Ограничить</h3>
+    <ul>
+      <li>Сахар всех видов — сиропы, мёд, агава, топинамбур</li>
+      <li>Соусы, майонез, полуфабрикаты</li>
+      <li>Консервы — кукуруза, горох (только замороженные)</li>
+      <li>Фрукты — не более 200 г в сутки</li>
+    </ul>
+  </div>
+
+  <div class="rule-card">
+    <h3>🥫 Замена соусам</h3>
+    <p><a href="https://ozon.ru/t/NBSXPUp" style="color:var(--sage)">Низкокалорийные соусы → Ozon</a></p>
+  </div>
+</div>
+
+<!-- ПРОДУКТЫ -->
+<div id="products" class="section">
+
+  <div class="product-group">
+    <h3>Каши</h3>
+    <div class="product-item">
+      <span class="product-name">Протеиновая каша</span>
+      <div class="product-links">
+        <a href="https://ozon.ru/t/qu5vroN" class="mini-link">Ozon</a>
+        <a href="https://vkusvill.ru/goods/kasha-proteinovaya-ovsyanaya-s-klubnikoy-30796.html" class="mini-link">ВВ</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="product-group">
+    <h3>Чипсы белковые</h3>
+    <div class="product-item">
+      <span class="product-name">Вариант 1</span>
+      <div class="product-links"><a href="https://ozon.ru/t/CPMxYUb" class="mini-link">Ozon</a></div>
+    </div>
+    <div class="product-item">
+      <span class="product-name">Вариант 2</span>
+      <div class="product-links"><a href="https://ozon.ru/t/pmSh1Gp" class="mini-link">Ozon</a></div>
+    </div>
+    <div class="product-item">
+      <span class="product-name">Вариант 3</span>
+      <div class="product-links"><a href="https://ozon.ru/t/jhkpZUf" class="mini-link">Ozon</a></div>
+    </div>
+    <div class="product-item">
+      <span class="product-name">Вариант 4</span>
+      <div class="product-links"><a href="https://ozon.ru/t/jhkp5jL" class="mini-link">Ozon</a></div>
+    </div>
+    <div class="product-item">
+      <span class="product-name">Сметана и зелень</span>
+      <div class="product-links"><a href="https://vkusvill.ru/goods/chipsy-proteinovye-smetana-i-zelen-44737.html" class="mini-link">ВВ</a></div>
+    </div>
+    <div class="product-item">
+      <span class="product-name">Из индейки</span>
+      <div class="product-links"><a href="https://vkusvill.ru/goods/chipsy-iz-indeyki-belkovye-102765.html" class="mini-link">ВВ</a></div>
+    </div>
+  </div>
+
+  <div class="product-group">
+    <h3>Экспонента (30 г белка)</h3>
+    <div class="product-item">
+      <span class="product-name">Все вкусы</span>
+      <div class="product-links"><a href="https://www.ozon.ru/brand/exponenta-100155872/" class="mini-link">Ozon</a></div>
+    </div>
+    <div class="product-item">
+      <span class="product-name">Творог</span>
+      <div class="product-links"><a href="https://ozon.ru/t/QoR52el" class="mini-link">Ozon</a></div>
+    </div>
+  </div>
+
+  <div class="product-group">
+    <h3>Протеин</h3>
+    <div class="product-item">
+      <span class="product-name">Whey Factors (клубника)</span>
+      <div class="product-links"><a href="https://usmall.ru/product/3689566-whey-factors-grass-fed-whey-protein-natural-strawberry-12-oz-340-g-natural-factors?variant=42600543&color=no-color&size=12+oz" class="mini-link">Usmall</a></div>
+    </div>
+    <div class="product-item">
+      <span class="product-name">Вариант 2</span>
+      <div class="product-links"><a href="https://ozon.ru/t/ULTfFJ2" class="mini-link">Ozon</a></div>
+    </div>
+  </div>
+
+  <div class="product-group">
+    <h3>Молочное и творожное</h3>
+    <div class="product-item">
+      <span class="product-name">Моцарелла без лактозы</span>
+      <div class="product-links"><a href="https://vkusvill.ru/goods/syr-proteinovyy-motsarella-bez-laktozy-palochki-120-g-103023.html" class="mini-link">ВВ</a></div>
+    </div>
+    <div class="product-item">
+      <span class="product-name">Творог высокобелковый</span>
+      <div class="product-links"><a href="https://vkusvill.ru/goods/tvorog-myagkiy-vysokobelkovyy-1-5-250-g-98015.html" class="mini-link">ВВ</a></div>
+    </div>
+    <div class="product-item">
+      <span class="product-name">Белковый йогурт</span>
+      <div class="product-links">
+        <a href="https://ozon.ru/t/jhkp4x2" class="mini-link">Ozon</a>
+        <a href="https://vkusvill.ru/goods/napitok-kislomolochnyy-protein-malina-200-g-100471.html" class="mini-link">ВВ</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="product-group">
+    <h3>Коктейли</h3>
+    <div class="product-item">
+      <span class="product-name">Neo High Protein шоколад</span>
+      <div class="product-links"><a href="https://vkusvill.ru/goods/molochnyy-kokteyl-neo-high-protein-vysokobelkovyy-shokolad-bez-dobavleniya-sakhara-260-g-115690.html" class="mini-link">ВВ</a></div>
+    </div>
+    <div class="product-item">
+      <span class="product-name">Bombbar шоколадный пломбир</span>
+      <div class="product-links"><a href="https://www.ozon.ru/product/bombbar-proteinovyy-molochnyy-kokteyl-bez-sahara-shokoladnyy-plombir-350ml-h-1sht-2864666012/" class="mini-link">Ozon</a></div>
+    </div>
+  </div>
+
+  <div class="product-group">
+    <h3>Прочее</h3>
+    <div class="product-item">
+      <span class="product-name">Протеиновая гранола</span>
+      <div class="product-links"><a href="https://www.ozon.ru/product/granola-proteinovaya-r-a-w-life-bez-sahara-bez-glyutena-roulayf-naturalnyy-gotovyy-veganskiy-produkt-261371188/" class="mini-link">Ozon</a></div>
+    </div>
+    <div class="product-item">
+      <span class="product-name">Протеиновый пудинг</span>
+      <div class="product-links"><a href="https://ozon.ru/t/h1rm4aH" class="mini-link">Ozon</a></div>
+    </div>
+  </div>
+</div>
+
+<!-- КАПЕЛЬНИЦЫ -->
+<div id="iv" class="section">
+
+  <div class="footnote" style="margin-bottom:20px">
+    Капельницы — после сдачи ферритина в <strong>ноябре–декабре 2026</strong>.<br>
+    Курс: 5 инъекций, периодичность 1 раз в 7–10 дней.
+  </div>
+
+  <div class="iv-card">
+    <div class="iv-badge">Шаг 1</div>
+    <h3>Глутатион 600 мг</h3>
+    <p style="font-size:13px;color:var(--muted)">1 ампула на 200 мл физраствора, внутривенно капельно</p>
+    <div class="drug-links" style="margin-top:10px">
+      <a href="https://www.eapteka.ru/goods/id329559/" class="buy-link">Eapteka</a>
+    </div>
+  </div>
+
+  <div class="iv-card">
+    <div class="iv-badge">Шаг 2</div>
+    <h3>Рибоксин</h3>
+    <p style="font-size:13px;color:var(--muted)">2 ампулы на 250 мл физраствора, внутривенно капельно</p>
+  </div>
+
+  <div class="iv-card">
+    <div class="iv-badge">Шаг 3</div>
+    <h3>Ликферр</h3>
+    <p style="font-size:13px;color:var(--muted)">1 ампула на 100–200 мл физраствора, внутривенно капельно</p>
+    <div class="drug-links" style="margin-top:10px">
+      <a href="https://www.eapteka.ru/goods/id212949/" class="buy-link">Eapteka</a>
+    </div>
+  </div>
+
+</div>
+
+<script>
+function show(id, btn) {
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  btn.classList.add('active');
+}
+</script>
+
+</body>
+</html>
